@@ -1,0 +1,35 @@
+.gameSelection {
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px; /* Padding for content */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  margin-top: 20px; /* Space above */
+}
+
+.heading {
+  font-size: 24px; /* Larger font size for headings */
+  color: #ff8c00; /* Warm yellow color */
+  margin-bottom: 10px; /* Space below headings */
+}
+
+.button {
+  background: linear-gradient(
+    90deg,
+    #3898ff,
+    #7a70ff
+  ); /* Gradient background */
+  color: white;
+  border: none;
+  border-radius: 25px; /* Rounded edges */
+  padding: 12px 24px; /* Padding for button */
+  cursor: pointer;
+  transition: background 0.3s ease; /* Smooth transition */
+}
+
+.button:hover {
+  background: linear-gradient(
+    90deg,
+    #7a70ff,
+    #3898ff
+  ); /* Reverse gradient on hover */
+}

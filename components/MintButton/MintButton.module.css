@@ -1,0 +1,42 @@
+.mintButton {
+  margin-top: 24px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0026ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.mintButton:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.button {
+  margin-top: 24px;
+  padding: 12px 24px; /* Increased padding for a more luxurious feel */
+  font-size: 18px; /* Larger font size */
+  cursor: pointer;
+  background: linear-gradient(
+    90deg,
+    #ff8c00,
+    #ff5ca0
+  ); /* Gradient background */
+  color: white;
+  border: none;
+  border-radius: 25px; /* Rounded edges */
+  transition: background 0.3s ease, transform 0.2s ease; /* Smooth transition */
+  text-align: center;
+}
+
+.button:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}

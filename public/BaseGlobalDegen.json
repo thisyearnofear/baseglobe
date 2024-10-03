@@ -1,0 +1,23 @@
+{
+  "name": "Surreal Globe NFT",
+  "description": "A vivid, colorful illustration of a surreal scene featuring a blue globe resembling Earth, surrounded by clouds and whimsical aircraft. Tiny purple arches and black top hats with gold rims adorn the islands on the globe, making it a unique and enchanting piece.",
+  "image": "https://ipfs.io/ipfs/QmW9xegjoZ2CLDmsh92LUGxgfYuT39M75UHkuAKNoR1WTs",
+  "attributes": [
+    {
+      "trait_type": "Style",
+      "value": "Surrealism"
+    },
+    {
+      "trait_type": "Color Scheme",
+      "value": "Vivid and Colorful"
+    },
+    {
+      "trait_type": "Main Elements",
+      "value": "Globe, Clouds, Airplanes"
+    },
+    {
+      "trait_type": "Unique Features",
+      "value": "Purple Arches, Black Top Hats"
+    }
+  ]
+}
