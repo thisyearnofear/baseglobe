@@ -1,8 +1,14 @@
-// hooks/useMint.ts
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import { contractConfig } from "../constants/contractConfig";
+import { abi } from "../../contract-abi";
 
-export const useMint = (onMintSuccess: () => void) => {
+const contractConfig = {
+  address: "0x62D3f69218A7fd765c16FB0857F992d564Fbb30c",
+  abi,
+} as const;
+
+const assetId = 1;
+
+export const useMint = () => {
   const {
     data: hash,
     writeContract: mint,
@@ -22,31 +28,22 @@ export const useMint = (onMintSuccess: () => void) => {
     },
   });
 
-  const handleMint = async () => {
-    try {
-      const result = await mint?.({
-        ...contractConfig,
-        functionName: "mint",
-      });
-      console.log("Mint transaction sent:", result);
-    } catch (error) {
-      console.error("Minting error:", error);
-    }
-  };
+  const isMinted = txSuccess;
 
-  // Call the onMintSuccess callback when the transaction is successful
-  if (txSuccess) {
-    onMintSuccess();
-  }
+  const mintToken = () =>
+    mint?.({
+      ...contractConfig,
+      functionName: "mint",
+      args: [assetId, 1],
+    });
 
   return {
-    hash,
-    txData,
+    mintToken,
     isMintLoading,
     isMintStarted,
-    mintError: mintError as Error | undefined,
-    txSuccess,
-    txError: txError as Error | undefined,
-    handleMint,
+    isMinted,
+    mintError,
+    txError,
+    hash,
   };
 };
