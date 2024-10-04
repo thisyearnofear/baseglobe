@@ -1,0 +1,35 @@
+.card {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background-color: white; /* Add a background color for visibility */
+  border: 1px solid #ccc; /* Add a border for visibility */
+  z-index: 10;
+}
+.card:hover {
+  transform: translateY(-5px); /* Floating effect on hover */
+}
+
+.card.active {
+  opacity: 1; /* Show active card */
+  transform: translateY(0); /* Reset transform */
+}
+
+.card.inactive {
+  transform: translateY(20px); /* Move inactive cards down */
+}
+.card.active {
+  opacity: 1; /* Show active card */
+  transform: translateY(0); /* Reset transform */
+}
+
+.card.inactive {
+  transform: translateY(20px); /* Move inactive cards down */
+}

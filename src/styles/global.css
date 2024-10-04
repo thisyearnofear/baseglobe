@@ -1,11 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  display: flex; /* Use flexbox for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  min-height: 100vh; /* Ensure body takes full height of the viewport */
   background-color: #c069bc; /* Warm light background */
-  position: relative; /* Positioning context for absolute elements */
-  overflow: hidden; /* Hide any overflow */
+  color: #333; /* Dark text for contrast */
+  font-family: "Arial", sans-serif; /* Clean, modern font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .page {
@@ -19,13 +23,7 @@ body {
   background: #add8e6; /* Light blue backdrop */
   border-radius: 25px; /* Rounded corners */
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-  margin: 20px; /* Reduced margin to center it better */
-  transition: transform 0.3s ease; /* Smooth transform for floating effect */
-}
-
-/* Floating effect */
-.page:hover {
-  transform: translateY(-5px); /* Move it up slightly on hover */
+  margin: 40px auto; /* Allow space for purple backdrop around the content */
 }
 
 .container {
