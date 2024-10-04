@@ -6,7 +6,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export default function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mousePosRef = useRef({ x: 0, y: 0 });
   const [isPaused, setIsPaused] = useState(false);
   const controlsRef = useRef<OrbitControls | null>(null);
 
@@ -58,7 +58,7 @@ export default function Game() {
     const handleMouseMove = (event: MouseEvent) => {
       const tx = -1 + (event.clientX / window.innerWidth) * 2;
       const ty = 1 - (event.clientY / window.innerHeight) * 2;
-      setMousePos({ x: tx, y: ty });
+      mousePosRef.current = { x: tx, y: ty };
     };
 
     window.addEventListener("resize", handleResize);
@@ -68,7 +68,7 @@ export default function Game() {
     const animate = () => {
       requestAnimationFrame(animate);
       if (!isPaused) {
-        mainScene.update(mousePos);
+        mainScene.update(mousePosRef.current);
       }
       if (controls.enabled) {
         controls.update();
