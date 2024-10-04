@@ -1,0 +1,29 @@
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.walletStatus {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.flipCardWrapper {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.mintSection {
+  width: 100%;
+}
+
+/* You might want to add some specific styles for the globe visualization */
+.globeVisualization {
+  width: 100%;
+  height: 200px; /* Adjust as needed */
+  margin-bottom: 1rem;
+  /* Add any specific styles for your globe visualization here */
+}

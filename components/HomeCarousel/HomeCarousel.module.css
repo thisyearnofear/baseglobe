@@ -1,0 +1,102 @@
+.carousel {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.carouselContent {
+  display: flex;
+  overflow-x: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carouselItem {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  padding: 0 1rem;
+}
+
+.carouselControls {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.carouselButton {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.carouselButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Position the next button on the right */
+.carousel > div:nth-child(3) {
+  right: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  height: 100%;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #f0f0f0;
+}
+
+/* Add a new style for the start game button */
+.startGameButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.startGameButton:hover {
+  background-color: #45a049;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel {
+    max-width: 100%;
+  }
+
+  .carouselButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cardTitle {
+    font-size: 1.5rem;
+  }
+}
