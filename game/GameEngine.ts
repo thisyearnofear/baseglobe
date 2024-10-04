@@ -1,63 +1,69 @@
 import * as THREE from "three";
-import { Airplane } from "./objects/Airplane";
-import { createAirplaneMesh } from "./objects/createAirplaneMesh";
+import { MainScene } from "./scenes/MainScene";
 
-let scene: THREE.Scene;
-let camera: THREE.PerspectiveCamera;
-let renderer: THREE.WebGLRenderer;
-let airplane: Airplane;
-let animationFrameId: number;
+export class GameEngine {
+  private scene: THREE.Scene;
+  private camera: THREE.PerspectiveCamera;
+  private renderer: THREE.WebGLRenderer;
+  private mainScene: MainScene;
+  private mousePos: { x: number; y: number };
 
-export function initGame(canvas: HTMLCanvasElement) {
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  renderer = new THREE.WebGLRenderer({ canvas });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  constructor(private canvas: HTMLCanvasElement) {
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(
+      60,
+      window.innerWidth / window.innerHeight,
+      1,
+      2000
+    );
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas,
+      alpha: true,
+      antialias: true,
+    });
+    this.mainScene = new MainScene(this.scene, this.camera);
+    this.mousePos = { x: 0, y: 0 };
+  }
 
-  const [airplaneMesh] = createAirplaneMesh();
-  airplane = new Airplane(airplaneMesh);
-  scene.add(airplane.mesh);
+  init() {
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
 
-  camera.position.z = 5;
+    this.camera.position.set(0, 100, 200);
+    this.camera.lookAt(0, 0, 0);
 
-  animate();
+    this.scene.fog = new THREE.Fog(0xf7d9aa, 100, 950);
 
-  window.addEventListener("resize", onWindowResize);
-}
+    this.mainScene.init();
 
-function animate() {
-  animationFrameId = requestAnimationFrame(animate);
-  airplane.tick(0.016); // Assuming 60 FPS
-  renderer.render(scene, camera);
-}
+    window.addEventListener("resize", this.handleResize);
+    document.addEventListener("mousemove", this.handleMouseMove);
+  }
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
+  update(mousePos: { x: number; y: number }) {
+    this.mousePos = mousePos;
+    this.mainScene.update(this.mousePos);
+  }
 
-export function cleanupGame() {
-  cancelAnimationFrame(animationFrameId);
-  window.removeEventListener("resize", onWindowResize);
+  render() {
+    this.renderer.render(this.scene, this.camera);
+  }
 
-  // Dispose of Three.js objects
-  scene.remove(airplane.mesh);
-  airplane.mesh.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.geometry.dispose();
-      if (child.material instanceof THREE.Material) {
-        child.material.dispose();
-      } else if (Array.isArray(child.material)) {
-        child.material.forEach((material) => material.dispose());
-      }
-    }
-  });
+  cleanup() {
+    window.removeEventListener("resize", this.handleResize);
+    document.removeEventListener("mousemove", this.handleMouseMove);
+    // Add any other cleanup logic here
+  }
 
-  renderer.dispose();
+  private handleMouseMove = (event: MouseEvent) => {
+    const tx = -1 + (event.clientX / this.renderer.domElement.clientWidth) * 2;
+    const ty = 1 - (event.clientY / this.renderer.domElement.clientHeight) * 2;
+    this.mousePos = { x: tx, y: ty };
+  };
+
+  private handleResize = () => {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+  };
 }
