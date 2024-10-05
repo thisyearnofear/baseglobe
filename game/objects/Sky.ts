@@ -4,27 +4,17 @@ import { Colors } from "../utils/colors";
 class Cloud extends THREE.Object3D {
   constructor() {
     super();
-
-    const geom = new THREE.BoxGeometry(20, 20, 20);
-    const mat = new THREE.MeshPhongMaterial({
+    const geometry = new THREE.SphereGeometry(15, 16, 16);
+    const material = new THREE.MeshPhongMaterial({
       color: Colors.white,
+      transparent: true,
+      opacity: 0.8,
     });
-
-    const nBlocs = 3 + Math.floor(Math.random() * 3);
-    for (let i = 0; i < nBlocs; i++) {
-      const m = new THREE.Mesh(geom, mat);
-      m.position.x = i * 15;
-      m.position.y = Math.random() * 10;
-      m.position.z = Math.random() * 10;
-      m.rotation.z = Math.random() * Math.PI * 2;
-      m.rotation.y = Math.random() * Math.PI * 2;
-
-      const s = 0.1 + Math.random() * 0.9;
-      m.scale.set(s, s, s);
-
-      m.castShadow = true;
-      m.receiveShadow = true;
-
+    const nSpheres = 3 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < nSpheres; i++) {
+      const m = new THREE.Mesh(geometry, material);
+      m.position.set(i * 15, Math.random() * 10, Math.random() * 10);
+      m.scale.setScalar(0.8 + Math.random() * 0.3);
       this.add(m);
     }
   }

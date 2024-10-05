@@ -29,11 +29,11 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({
       ),
     },
     {
-      title: "Select Avatar",
+      title: "Select Pilot",
       content: <PilotSelectionCard />,
     },
     {
-      title: "Select Pilot",
+      title: "Select Craft",
       content: <AircraftSelectionCard />,
     },
   ];

@@ -15,7 +15,7 @@ export default function Game() {
 
     // Scene setup
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(fogColor, 100, 950);
+    scene.fog = new THREE.Fog(fogColor, 50, 500); // Brings the fog closer and makes it denser
 
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
@@ -24,7 +24,7 @@ export default function Game() {
       1,
       2000
     );
-    camera.position.set(0, 100, 200);
+    camera.position.set(0, 100, 200); // Adjusted camera position
     camera.lookAt(0, 0, 0);
 
     // Renderer setup
@@ -37,12 +37,16 @@ export default function Game() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.shadowMap.enabled = true;
 
-    // Controls setup
+    // Orbit controls (for pausing)
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.enabled = false; // Disable controls by default
-    controlsRef.current = controls;
+    controls.enableZoom = true;
+    controls.enablePan = true;
+    controls.enabled = isPaused;
+
+    const raycaster = new THREE.Raycaster(); // Raycaster to track mouse in 3D
+    const mouse = new THREE.Vector2(); // To store normalized mouse coordinates
 
     // Main scene setup
     const mainScene = new MainScene(scene, camera);
@@ -68,6 +72,8 @@ export default function Game() {
     const animate = () => {
       requestAnimationFrame(animate);
       if (!isPaused) {
+        camera.fov = isPaused ? 40 : 85; // Increase the fov to zoom out when not paused
+        camera.updateProjectionMatrix();
         mainScene.update(mousePosRef.current);
       }
       if (controls.enabled) {

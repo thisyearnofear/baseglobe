@@ -22,7 +22,8 @@ export class Sea extends THREE.Object3D {
   }
 
   private createSea() {
-    const geom = new THREE.CylinderGeometry(600, 600, 800, 40, 10);
+    const geom = new THREE.CylinderGeometry(600, 600, 800, 80, 20);
+
     geom.rotateX(-Math.PI / 2);
 
     // Move the sea up
